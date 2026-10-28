@@ -10,6 +10,10 @@ pub type Sprite {
 }
 
 fn sprite_decoder() -> decode.Decoder(Sprite) {
+  // decode.field only grabs from top level
+  // decode.subfield takes a List(a) as a first argument
+  // This is for grabbing a nested set of fields, where each item is
+  // nested within the previous one.
   use pokemon_id <- decode.field("id", decode.int)
   use pokemon_name <- decode.field("name", decode.string)
   use url <- decode.subfield(["sprites", "front_default"], decode.string)
